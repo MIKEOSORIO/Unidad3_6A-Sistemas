@@ -148,40 +148,42 @@ elif x==3: # En esta parte convierte a triplos los ejercicios dados en parentesi
     for i in valor:
         if i != " ":
             p.append(i)
-
-    #=============================================================================
-    inicio = Inicio()
+    # =============================================================================
     temporalCero = ""
-    for i in p: 
-        suma +=1
-        if i =="(" or i == ")":
-            #STRING TEMPORAL CERO
-            # TEMPORALCERO = VARIABLE | OPERANDO 1 | VARIABLE SON LOS PASOS QUE SE NECESITAN PARA QUE EL TEMPORAL 0 FUNCIONE CORRECTAMENTE
-            temporalCero = "_t0 = " + p[suma-4] + " " +  p[suma-3] + " " + p[suma-2] + " " + p[suma-1] + " " + p[suma]
-            
-    #===========================================================================================
+    for i in p:
+        suma += 1
+        if i == "(" or i == ")":
+            # STRING TEMPORAL CERO
+            # TEMPORALCERO = VARIABLE | OPERANDO 1 | VARIABLE
+            temporalCero = "_t0 = " + p[suma - 4] + " " + p[suma - 3] + " " + p[suma - 2] + " " + p[suma - 1] + " " + p[
+                suma]
+                # en este apartado se hizo el cambio de variables en los temporales ya que salia invertido
+    # =============================================================================
     temporalUno = ""
     for i in p:
         if i == "*" or i == "/":
-            if p[4] == "(" :
-                #EN ESTE APARTADO VUELVE A SUCEDER LA INCORPORACION DE LOS DOS TEMPORLES DEPENDIENDO DE SU 
-                temporalUno = "_t1 ="+ " _t0 " + p[suma-5] + " " +  p[suma-6] + " " 
+            if p[4] == "(":
+                temporalUno = "_t1 =" + " _t0 " + p[suma - 5] + " " + p[suma - 6] + " "
             else:
-                temporalUno = "_t1 = " + p[suma-2] + " " +  p[suma-3] + " " +  "_t0"
-    #================================================================================================
+                temporalUno = "_t1 = " + " _t0 " + p[suma - 3] + " " + p[suma - 2] + " "
+    # =============================================================================
     temporalDos = ""
     for i in p:
-        if i == "+" or i == "-": 
-            if p[4] == "(" :
-                temporalDos = "_t2="+ " _t1 " + p[suma-7] + " " +  p[suma-8] + " " 
+        if i == "+" or i == "-":
+            if p[4] == "(":
+                temporalDos = "_t2 = " + " _t1 " + p[suma - 7] + " " + p[suma - 8] + " "
             else:
-                temporalDos = "_t2 = " + p[suma] + " " +  p[suma-1] + " " +  "_t1"
-    print(Fore.MAGENTA + espacio + temporalCero)
-    print(Fore.MAGENTA + espacio +temporalUno)
-    print(Fore.MAGENTA + espacio +temporalDos)
+                temporalDos = "_t2 = " + " _t1 " + p[suma - 1] + " " + p[suma] + " "
+
+    #apartado de impresion--------------------------
+    inicio = Inicio()
+    print(Fore. MAGENTA +espacio + temporalCero)
+    print(Fore. MAGENTA +espacio +temporalUno)
+    print(Fore. MAGENTA +espacio +temporalDos)
     fin = Fin()
+
 #===========================================================================================================
-elif x==4: # Este apartado es de los tipos de troplos de  3 simbolos aritmeticos con parentesis 
+elif x==4: # Este apartado es de los tipos de triplos de  3 simbolos aritmeticos con parentesis
     espacio = "                                    "
     p = []
     vs = []
@@ -268,103 +270,78 @@ elif x==4: # Este apartado es de los tipos de troplos de  3 simbolos aritmeticos
 
 #================================================================================================================
 elif x==5: # Al menos 2 símbolos aritméticos con anidamiento de paréntesis
-    espacio = "                                    "
-    p = []
-    S = []
-    TC= []
-    valor = contents
-    suma = -1
-    suma2 = -1
-    for i in valor:
-        if i != " ":
-            p.append(i)
 
-    #=============================================================================
-    inicio = Inicio()
-    for i in p: 
-        suma +=1
-        if i =="(" or i ==")":
-            if i =="(" or i ==")":
-                p.remove(p[suma-13])
-                TC.append(p[suma-12])
-                p.remove(p[suma-12])
-                TC.append(p[suma-11])
-                p.remove(p[suma-11])
-                TC.append(p[suma-10])
-                p.remove(p[suma-10])
-                TC.append(p[suma-9])
-                p.remove(p[suma-9])
-                TC.append(p[suma-8])
-                p.remove(p[suma-8])
-                TC.append(p[suma-7])
-                p.remove(p[suma-7])
-                TC.append(p[suma-6])
-                p.remove(p[suma-6])
-                p.remove(p[suma-5])
-                #TC = p[suma-12] + " " + p[suma-11] + " " + p[suma-10] + " " + p[suma-9] + " " + p[suma-8] + " " +  p[suma-7] + " " + p[suma-6]
-                break
-    #================================================================================
-    #print(p)
-    #print(TC)
-    #print(S)
+        espacio = "                                    "
+        valor = contents #asignamos los valor del .txt a la varible valor
+        pila = []
+        resultado = []
+        resultado_f = []
+        resultado_ff = []
+        contador = -1
+        if valor != " ":
+            for i in valor:
+                if i != " ":
+                    pila.append(i)
 
+        for i in pila:
+            contador += 1
 
-    temporalCero = ""
-    for x in TC:  # El temporal cero lo que hace es ejecutar o tomar el primevalor el cual se encuentra dentro del parentesis 
-        suma +=1
-        if x =="(" or x ==")":
-            if TC[0]=="(":
-                temporalCero = "_t0 = " + TC[suma2-6] + " " +  TC[suma2-5] + " " + TC[suma2-4] + " " + TC[suma2-3] + " " + TC[suma2-2]
-                #temporalCero = "_t0 = " + TC[suma2-4] + " " +  TC[suma2-3] + " " + TC[suma2-2] + " " + TC[suma2-1] + " " + TC[suma2]
-            else:
-                temporalCero = "_t0 = " + TC[suma2-4] + " " +  TC[suma2-3] + " " + TC[suma2-2] + " " + TC[suma2-1] + " " + TC[suma2]
+            if i == "(":
+                resultado.append(pila[contador])
+                resultado.append(pila[contador + 1])
+                resultado.append(pila[contador + 2])
+                resultado.append(pila[contador + 3])
+                resultado.append(pila[contador + 4])
+                resultado.append(pila[contador + 5])
+                resultado.append(pila[contador + 6])
+                resultado.append(pila[contador + 7])
+                resultado.append(pila[contador + 8])
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
+                pila.pop(contador)
 
-    #=====================================================================================================
-    temporalUno = "" # Este temporal es la suma con el temporal cero pero primero toma la variable la cual dependiendo si es una suma o otra simbolo
-    for x in TC: 
-        suma2 +=1
-        if x =="+" or x =="-" or x =="*" or x =="/":
-            if TC[0]=="(":
-                temporalUno = "_t1 = t0 "  + TC[suma2-7] + " " +  TC[suma2-6]  
-            else:
-                temporalUno = "_t1 = t0 "  + TC[suma2-3] + " " +  TC[suma2-4]    
-
-            #temporalCero = "_t1 = " + TC[suma-8] + " " +  TC[suma-7] + " " +  TC[suma-6] + " " +  TC[suma-5] + " " +  TC[suma-4]    
-
-
-    #============================================================================================
-    temporalDos = "" # Este temporal toma el siguiente simblo y forma el temporal 
-    for i in p: 
-        suma +=1
-        if p[0]=="-" or p[0]=="+" or p[0]=="*" or p[0]=="/":
-            temporalDos = "_t2 = " + p[1] +  " " + p[2] + " " + p[3]  
-            break
+        if pila[-1] == "*" or pila[-1] == "/":
+            resultado_f.append([pila[-1], pila[-2]])
+            pila.pop()
+            pila.pop()
         else:
-            temporalDos = "_t2 = " + " " +p[0]  + " " + p[3] + " " + p[1] 
-            break
-                #temporalCero = "_t1 = " + TC[suma-8] + " " +  TC[suma-7] + " " +  TC[suma-6] + " " +  TC[suma-5] + " " +  TC[suma-4]    
+            resultado_f.append([pila[-2], pila[-3], pila[-4]])
+            pila.remove(pila[-2])
+            pila.remove(pila[-2])
+            pila.remove(pila[-2])
 
+        resultado.remove(resultado[0])
+        resultado.pop()
 
-    temporalTres = ""# En este temporal hace la suma o junta los dos temporales los cuales son el temporal uno y el temporal dos
-    for i in p: 
-        suma +=1
-        if p[0]=="-" or p[0]=="+" or p[0]=="*" or p[0]=="/":
-            temporalTres = "_t3 = " + temporalUno[0:3] +  " " + p[0] + " " + temporalDos[0:3]
-            break
-        else:
-            temporalTres = "_t3 = " + temporalUno[0:3] +  " " + p[2] + " " + temporalDos[0:3]
-            break
-                #temporalCero = "_t1 = " + TC[suma-8] + " " +  TC[suma-7] + " " +  TC[suma-6] + " " +  TC[suma-5] + " " +  TC[suma-4]    
+        contador = -1
+        for i in resultado:
+            contador += 1
+            if i == "(":
+                resultado_ff.append([resultado[contador + 1], resultado[contador + 2], resultado[contador + 3]])
+                resultado.remove(resultado[contador])
+                resultado.remove(resultado[contador])
+                resultado.remove(resultado[contador])
+                resultado.remove(resultado[contador])
+                resultado.remove(resultado[contador])
 
- 
- #=====================================================================================================
-   
+        valor_t0 = "t0 = " + " ".join(resultado_ff[0])
+        valor_t1 = "t1 = t0 " + " ".join(resultado)
+        valor_t2 = "t2 = " + " ".join(resultado_f[0])
+        valor_t3 = "t3 = t2 " + pila[-1] + " t1"
+        
+        # hubo una modificacion, en los valores ya que tenia los operandos invertidos
 
-            #temporalCero = "_t1 = " + TC[suma-8] + " " +  TC[suma-7] + " " +  TC[suma-6] + " " +  TC[suma-5] + " " +  TC[suma-4]
-    #zona de impresion de resultados
+        # Espacio de impresion de Resultados
 
-    print(Fore.MAGENTA + espacio + temporalCero)
-    print(Fore.MAGENTA + espacio +temporalUno)
-    print(Fore.MAGENTA + espacio +temporalDos)
-    print(Fore.MAGENTA + espacio +temporalTres)
-    fin = Fin()
+        inicio = Inicio()
+        print(Fore.MAGENTA + espacio + valor_t0)
+        print(Fore.MAGENTA + espacio + valor_t1)
+        print(Fore.MAGENTA + espacio + valor_t2)
+        print(Fore.MAGENTA + espacio + valor_t3)
+        fin = Fin()
